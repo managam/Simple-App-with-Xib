@@ -17,6 +17,11 @@ class SimpleAppTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Set title
+        self.title = "Simple Datas"
+        
+        // Register custom table view cell
         tableView.registerNib(UINib(nibName: "SimpleAppTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         // Get Simple data
@@ -65,9 +70,9 @@ class SimpleAppTableViewController: UITableViewController {
         let simpleData = self.simpleDatas[indexPath.row]
         
         // For image caption
-        cell.captionLabel.textColor = UIColor.blackColor()
-        cell.captionLabel.shadowColor = UIColor.whiteColor()
-        cell.captionLabel.text = simpleData.caption
+        cell.caption.textColor = UIColor.blackColor()
+        cell.caption.shadowColor = UIColor.whiteColor()
+        cell.caption.text = simpleData.caption
         
         // For default thumbnail image
         cell.thumbnailImageView.contentMode = UIViewContentMode.ScaleAspectFit
@@ -86,8 +91,8 @@ class SimpleAppTableViewController: UITableViewController {
                 if let url = NSURL(string: simpleData.imageURL) {
                     if let data = NSData(contentsOfURL: url) {
                         
-                        cell.captionLabel.textColor = UIColor.whiteColor()
-                        cell.captionLabel.shadowColor = UIColor.clearColor()
+                        cell.caption.textColor = UIColor.whiteColor()
+                        cell.caption.shadowColor = UIColor.clearColor()
                         
                         cell.thumbnailImageView.contentMode = UIViewContentMode.ScaleAspectFill
                         cell.thumbnailImageView.image = UIImage(data: data)
@@ -102,15 +107,26 @@ class SimpleAppTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let destinationViewController  = SimpleAppDetailViewController()
+            destinationViewController.simpleData = self.simpleDatas[indexPath.row]
+        self.navigationController?.pushViewController(destinationViewController, animated: true)
+        
+    }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    /* override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let destinationController = segue.destinationViewController as! SimpleAppDetailViewController
+            destinationController.simpleData = self.simpleDatas[indexPath.row]
+        }
+    } */
+    
 
 }
