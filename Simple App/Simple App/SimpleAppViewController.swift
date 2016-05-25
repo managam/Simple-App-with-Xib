@@ -12,14 +12,18 @@ class SimpleAppTableViewController: UITableViewController {
     
     var simpleDatas = [Simple]()
     var imageCache: NSCache = NSCache()
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set title
+        self.title = "Simple Datas"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        // Set title
-        self.title = "Simple Datas"
         
         // Register custom table view cell
         tableView.registerNib(UINib(nibName: "SimpleAppTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")

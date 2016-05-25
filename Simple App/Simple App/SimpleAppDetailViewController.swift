@@ -16,6 +16,8 @@ class SimpleAppDetailViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var caption: UILabel!
     @IBOutlet weak var desc: UILabel!
     
+    var previousViewControllerTitle: String!
+    
     // Register custom view
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: "SimpleAppDetailViewController", bundle: nil)
@@ -42,6 +44,13 @@ class SimpleAppDetailViewController: UIViewController, UITableViewDataSource, UI
         // Custom table view
         tableView.estimatedRowHeight = 36.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // set title previous is Back
+        if self.navigationController!.viewControllers.count > 1 {
+            let previousView: UIViewController = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count - 2]
+            self.previousViewControllerTitle = previousView.navigationItem.title
+            previousView.navigationItem.title = "Back"
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -16,12 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
-        let simpleAppTableViewController = SimpleAppTableViewController()
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        // window tint color
+        window?.tintColor = UIColor.blackColor()
+        
+        // Use Simple App Table View Controller as root view controller in navigation controller
+        let simpleAppTableViewController = SimpleAppTableViewController()
+        
         window?.rootViewController = UINavigationController(rootViewController: simpleAppTableViewController)
         window?.makeKeyAndVisible()
+        
+        // Set status bar style light content
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         return true
     }
